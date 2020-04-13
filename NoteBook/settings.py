@@ -71,11 +71,11 @@ INSTALLED_APPS = [
     'webpush',
 ]
 
-
+#Please provide your own keys after cloning the project
 WEBPUSH_SETTINGS = {
-   "VAPID_PUBLIC_KEY": "BG9mp7rgU7s90iHGOq0eC99cJG6g3Ii4t8ev23rWUVPEjNVYAYpc-rK9qoCXrHcF-EGr5_zyGZDYzsdodRDhVTM",
-   "VAPID_PRIVATE_KEY": "SSG3x3xL6Sw2Ike6jofgZrcW-WUBpY1MIvOHrIVVGwc",
-   "VAPID_ADMIN_EMAIL": "real4suraj@gmail.com",
+   "VAPID_PUBLIC_KEY": "",
+   "VAPID_PRIVATE_KEY": "",
+   "VAPID_ADMIN_EMAIL": "",
 }
 
 
