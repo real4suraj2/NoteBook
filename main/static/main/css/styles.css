@@ -1,0 +1,148 @@
+@media only screen and (max-width: 479px) {
+/* start of phone styles */
+.mobile-hide{
+	display:none!important;
+}
+}
+.mobile-hide{
+	display: block;
+}
+.align-search{
+	width: 30% !important;
+	position: absolute;
+	top: 0px;
+	left: 50%;
+	transform:translateX(-50%);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 50px;
+    line-height: 50px;
+    color: #2c3e50;
+    position: relative;
+}
+
+.spacer{
+	padding-top : 2em;
+}
+.spacer strong{
+	display: inline-block;
+	padding: 0.4em;
+}
+
+.search_bar{
+	display: inline-block;
+}
+
+.destroy-css label{
+	color:#000!important;
+	opacity:1!important;
+}
+.destroy-css input[type='checkbox']{
+	opacity:1!important;
+	position:relative!important;
+	pointer-events:all!important;
+}
+
+.block{
+	z-index : -1;
+}
+.invisible{
+	visibility:none!important;
+	display:none!important;
+}
+
+.push{
+	 background: rgba(0, 0, 0, 0.87);
+    position: absolute;
+    top: 64px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.push-body{
+	height: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+#send-push__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    margin: 10% auto;
+}
+
+#send-push__form > h3 {
+    font-size: 17px;
+    font-weight: bold;
+    margin: 15px 0;
+    color: orangered;
+    text-transform: uppercase;
+}
+
+#send-push__form > .error {
+    margin: 0;
+    font-size: 15px;
+    font-weight: normal;
+    color: orange;
+    opacity: 0.7;
+}
+
+#send-push__form > input, #send-push__form > textarea {
+    border: 3px solid orangered;
+    box-shadow: unset;
+    padding: 13px 12px;
+    margin: 12px auto;
+    width: 80%;
+    font-size: 13px;
+    font-weight: 500;
+    color:#fff!important;
+}
+
+#send-push__form > textarea {
+	min-height: 150px;
+}
+
+#send-push__form > input:focus, #send-push__form > textarea:focus {
+    border: 3px solid orangered;
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.2);
+    outline: unset;
+}
+
+#send-push__form > button {
+    justify-self: center;
+    padding: 12px 25px;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: orangered;
+    color: white;
+    border: none;
+    font-size: 14px;
+    letter-spacing: -0.1px;
+    cursor: pointer;
+}
+
+#send-push__form > button:disabled {
+    background: dimgrey;
+    cursor: not-allowed;
+}
+
+#overlay {
+  position: fixed;
+  width: 100%; 
+  height: 100%; 
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); 
+  z-index: 2; 
+}
+

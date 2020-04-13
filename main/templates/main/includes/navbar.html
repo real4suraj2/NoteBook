@@ -1,0 +1,51 @@
+<nav>
+			<div class="nav-wrapper">
+			  <a href="/" class="brand-logo"><i class="material-icons mobile-hide" style="font-size:2em;">local_library</i>NoteBook</a>
+			  <a href="#" data-target="menubar" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+			   <div class="container" style="max-width:30%;">
+				   <div class="nav-wrapper">
+			   <ul id="nav-mobile" class=" hide-on-med-and-down">
+					<form action="/search/" method="POST">
+							{% csrf_token %}
+							<div class="input-field">
+									  <input id="search" type="search" required placeholder='Search...' name="search">
+									  <label class="label-icon" for="search"><i class="material-icons" style="font-size:2em;">search</i></label>
+									  <i class="material-icons">close</i>
+							</div>
+				  </form>   
+				  </div>
+			   </ul>
+			   </div>
+			  <ul id="nav-mobile" class="hide-on-med-and-down" style="position: absolute;right: 0px;top: 0px;">
+				<li><a href="/"><i class="material-icons left" style="font-size:2em;">home</i>Home</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="/account"><i class="material-icons left" style="font-size:2em;">account_circle</i>{{user.username}}</a></li>
+				<li><a href="/logout"><i class="material-icons left" style="font-size:2em;">phonelink_erase</i>Logout</a></li>
+				{% else %}
+				<li><a href="/login"><i class="material-icons left" style="font-size:2em;">vpn_key</i>Login</a></li>
+				<li><a href="/register"><i class="material-icons left" style="font-size:2em;">person_add</i>Register</a></li>
+				{% endif%}
+			  </ul>
+			</div>
+			
+			<ul class="sidenav" id="menubar">
+				<li><a>
+					<form action="/search/" method="POST">
+						{% csrf_token %}
+				<div class="input-field col s6" style="margin-top:1em;">
+						  <i class="material-icons prefix" style="transform: translateY(-21%);">search</i>
+						  <input id="icon_prefix" type="search" class="validate" style="top: 2.5px;position: absolute;display: block;" name="search">
+				</div>
+				</form>
+				</a></li>
+				<li><a href="/"><i class="material-icons left" style="font-size:2em;">home</i>Home</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="/account"><i class="material-icons left" style="font-size:2em;">account_circle</i>{{user.username}}</a></li>
+				<li><a href="/logout"><i class="material-icons left" style="font-size:2em;">phonelink_erase</i>Logout</a></li>
+				{% else %}
+				<li><a href="/login"><i class="material-icons left" style="font-size:2em;">vpn_key</i>Login</a></li>
+				<li><a href="/register"><i class="material-icons left" style="font-size:2em;">person_add</i>Register</a></li>
+				{% endif%}
+		  </ul>
+			
+</nav>

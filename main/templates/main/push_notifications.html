@@ -1,0 +1,83 @@
+{% extends 'main/header.html' %}
+
+{% block content %}
+<div class="push">
+	<div class="push-body">
+		<form id="send-push__form">
+			<h3 class="header">Send a push notification</h3>
+			<p class="error"></p>
+			<input type="text" name="head" placeholder="Header:  Input the head of your body">
+			<textarea name="body" id="" cols="30" rows="10" placeholder="Body: Enter the notification body here."></textarea>
+			<button>Send Me</button>
+		</form>
+	</div>
+</div>
+<script>
+		const showNotAllowed = (message) => {
+				const button = document.querySelector('form>button');
+				button.innerHTML = `${message}`;
+				button.setAttribute('disabled', 'true');
+		};
+	   if ('serviceWorker' in navigator) {
+			if (Notification.permission === 'denied') {
+					showNotAllowed('You prevented us from showing notifications');
+			}
+			if (!'PushManager' in window) {
+			showNotAllowed("Push isn't allowed in your browser")
+			}
+		} 
+		else {
+			showNotAllowed("You can't send push notifications")
+		}
+	
+	
+	const pushForm = document.getElementById('send-push__form');
+const errorMsg = document.querySelector('.error');
+
+pushForm.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const input = this[0];
+    const textarea = this[1];
+    const button = this[2];
+    errorMsg.innerText = '';
+
+    const head = input.value;
+    const body = textarea.value;
+    const meta = document.querySelector('meta[name="user_id"]');
+    const id = meta ? meta.content : null;
+    if (head && body && id) {
+        button.innerText = 'Sending...';
+        button.disabled = true;
+
+        const res = await fetch('/send_push/', {
+            method: 'POST',
+            body: JSON.stringify({head, body, id}),
+            headers: {
+                'content-type': 'application/json'
+            }
+        });
+        if (res.status === 200) {
+            button.innerText = 'Send another 😃!';
+            button.disabled = false;
+            input.value = '';
+            textarea.value = '';
+        } else {
+            errorMsg.innerText = res.message;
+            button.innerText = 'Something broke 😢..  Try again?';
+            button.disabled = false;
+        }
+    }
+    else {
+        let error;
+        if (!head || !body){
+            error = 'Please ensure you complete the form 🙏🏾'
+        }
+        else if (!id){
+            error = "Are you sure you're logged in? 🤔. Make sure! 👍🏼"
+        }
+        errorMsg.innerText = error;
+    }
+});
+	
+	</script>
+{% endblock %}

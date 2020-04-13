@@ -1,0 +1,112 @@
+{% extends 'main/header.html' %}
+
+
+{% block content %}
+ <div id="overlay" class="invisible"></div> 
+<div class="container">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class = "row">
+        {% for field in form %}
+			<div class="input-field col s12 m12 l12">
+				{% if field.errors %}
+				<p>{{ field.errors }}</p>
+				{% endif %}
+				{% if forloop.counter0 == 2 %}
+				{{ field.label_tag }} <div class="spacer">{{field}}</div>
+				{% else %}
+				{{ field.label_tag }} {{field}}
+				{% endif %}
+			</div>
+		{% endfor %}
+		<br><br>
+		{% for field in form2 %}
+			<div class="input-field col s12 m12 l12">
+				{% if field.errors %}
+				<p>{{ field.errors }}</p>
+				{% endif %}
+				{% if forloop.counter0 == 4 %}
+				{{ field.label_tag }} <div class="spacer destroy-css hide-me" style="display:none;">{{field}}</div>
+				{% elif forloop.counter0 != 5 %}
+				{{ field.label_tag }} {{field}}
+				{% endif %}
+			</div>
+		{% endfor %}
+		<div class="file-field input-field col s12 m12 l12" style="display:flex;">
+						  <div class="btn btn-small purple">
+							<label for="files" style="color:#fff;font-size:1em;"><span>Choose File</span></label>
+							<input type="file" name="files[]" id="files" style="z-index: -1;">
+						  </div>
+						  <div class="file-path-wrapper" style="z-index: -1;">
+							<input class="file-path validate" type="text">
+						  </div>
+						  <div>
+						  <button type="button" class="btn green" onclick="uploadimage();">Upload</button>
+						  </div>
+				</div>
+			  <div class="progress invisible" id="fieldB">
+				  <div class="indeterminate"></div>
+			  </div>
+		</div>
+		<p>Raw passwords are not stored, so there is no way to see this user’s password, but you can change the password using <a href="/change_password">this form</a>.</p>
+        <button class='btn' type="submit">Submit</button>
+    </form>
+    <br>
+</div>
+<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-storage.js"></script>
+
+<script>
+	document.getElementById("id_image").value = '';
+	  var config = {
+			'apiKey': "AIzaSyCTGc0x8acUhHq5iM3bNI2GYbQYal4czps",
+			'authDomain': "notebook-aca9b.firebaseapp.com",
+			'databaseURL': "https://notebook-aca9b.firebaseio.com",
+			'projectId': "notebook-aca9b",
+			'storageBucket': "notebook-aca9b.appspot.com",
+			'messagingSenderId': "634156586246",
+			'appId': "1:634156586246:web:0e5ce1b8f72928d6d0fa87",
+			'measurementId': "G-RLR7491Z7P"
+			}
+	  firebase.initializeApp(config);
+	  
+	  function uploadimage(){
+			  
+			  var storage = firebase.storage();
+			  var file = document.getElementById("files").files[0];
+			  if(file == undefined){
+				  alert("Please choose a file or leave the field as it is");
+				  return;
+			  }
+			  if(file.type.substring(0,5) != 'image'){
+				  alert("Invalid File Format !!");
+				  return;
+			  }
+			  if(file.size >= 1024*1024 ){
+				  alert("Size file should be less than 1 Mb!")
+				  return;
+			  }
+			  document.getElementById('overlay').classList.remove("invisible")
+			  document.getElementById('fieldB').classList.remove("invisible")
+			  var storageRef = storage.ref();
+			  var thisref = storageRef.child('profile_images/{{user.username}}').put(file);
+			  thisref.on('state_changed',function(snapshot){
+			  },
+			  function(error) {
+				  document.getElementById('fieldA').classList.add("invisible");
+			      document.getElementById('fieldB').classList.add("invisible");
+			      alert("Image Upload Failed!!")
+			  },
+			  function() {
+			    thisref.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+							console.log('File available at', downloadURL);
+							document.getElementById("id_image").value = downloadURL;
+							alert("Image Uploaded Successfully!!");
+							document.getElementById('overlay').classList.add("invisible");
+							document.getElementById('fieldB').classList.add("invisible");
+			   });
+			});
+	  }
+</script>
+
+{% endblock %}

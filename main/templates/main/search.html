@@ -1,0 +1,46 @@
+{% extends 'main/header.html' %}
+{% load static %}
+{% block content %}
+<ul class="collection with-header">
+        <li class="collection-header"><h4>Matching Series</h4></li>
+        {% if no_series %}
+			<li class="collection-item avatar">
+				<img src = "{% static 'main/images/not-found.png' %}" alt="" class="circle">
+				<p>No matching series exists..</p>
+				</li>
+        {% else %}
+			{% for s,part_one in part_ones.items %}
+			<li class="collection-item avatar">
+				<img src="{{s.series_image}}" alt="" class="circle">
+				<span class="title">{{s.note_series}}</span>
+				<p>
+				{{s.series_summary}}
+				</p>
+					<a href="/{{part_one}}" class="secondary-content"><i class="material-icons">send</i></a>
+			</li>
+			{% endfor %}
+        {% endif %}
+ </ul>
+ <ul class="collection with-header">
+        <li class="collection-header"><h4>Matching Notes</h4></li>
+        {% if no_note %}
+        <li class="collection-item avatar">
+				<img src = "{% static 'main/images/not-found.png' %}" alt="" class="circle">
+				<p>No matching note exists..</p>
+				</li>
+        {% else %}
+        {% for title,note in matching_notes.items %}
+        <li class="collection-item avatar">
+				<img src="{% static 'main/images/note.jpg' %}" alt="" class="circle">
+				<span class="title">{{note.note_title}}</span>
+				<p>
+					{{note.note_published}}<br>
+					{{note.note_series}}
+				</p>
+				<a href="/{{note.note_slug}}" class="secondary-content"><i class="material-icons">send</i></a>
+		</li>
+        {% endfor %}
+        {% endif %}
+ </ul>
+ 
+{% endblock %}

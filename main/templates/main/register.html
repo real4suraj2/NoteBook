@@ -1,0 +1,21 @@
+{% extends 'main/header.html' %}
+
+
+{% block content %}
+		<br><br>
+		{% if not display_verify %}
+		<form method="POST">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<button class='btn' type='submit'>Register</button>
+		</form>
+		If you already have an account , <a href='/login'>Login</a> instead. 
+		{% else %}
+		<form method="POST">
+			{% csrf_token %}
+			{{ form2.as_p }}
+			<button class='btn' type='submit'>Verify</button>
+		</form>
+		{% endif%}
+{% endblock %}
+

@@ -1,0 +1,45 @@
+{% extends 'main/header.html' %}
+
+{% load static %}
+{% block content %}
+		  
+		  
+		  <div style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+        <h2 class="section-title wow fadeInUp">About Me</h2>
+
+        <div class="row" >
+
+          <div class="col md12 l12 s12">
+            <div class="biography">
+              <div  style="max-width:415px;border-radius:50%;">
+				  {% if user.userprofile.image != '' %}
+				  			<img src="{{ user.userprofile.image }}"  style="width:100%;max-width: 600px;overflow: hidden;"alt="">
+                {% else %}
+                           <img src="{% static 'main/images/user.jpeg' %}" alt="" >
+                {% endif %}
+              </div>
+              <ul class="collection">
+                <li class="collection-item active"><strong>Username:</strong> {{ user }}</li>
+                <li class="collection-item"><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</li>
+                <li class="collection-item"><strong>Email:</strong> {{ user.email }}</li>
+                <li class="collection-item"><strong>City:</strong> {{ user.userprofile.city }}</li>
+                <li class="collection-item"><strong>Nationality:</strong> Indian</li>
+                <li class="collection-item"><strong>Phone:</strong> {{ user.userprofile.phone }}</li>
+                <li class="collection-item"><strong>Website:</strong> {{ user.userprofile.website }}</li>
+              </ul>
+              <div class="card-action">
+				  <a href="/account/edit" class="btn">Edit</a>
+				</div>
+            </div>
+          </div> 
+
+
+          </div>
+
+
+        </div> <!-- /.row -->
+      </div> <!-- /.container -->
+		  
+
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% load static %}
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {% if user.id %}
+        <meta name="user_id" content="{{ user.id }}">
+    {% endif %}
+	<link href="{% static 'tinymce/css/prism.css' %}" rel='stylesheet'>
+	<link rel="shortcut icon" type="image/png" href="{% static 'main/images/icons/Icon-48.png' %}"/>
+	<link href="{% static 'main/css/styles.css' %}" rel='stylesheet'>
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	 <link rel="manifest" href="{% static 'main/manifest.webmanifest' %}">
+</head>
+<body> 
+	{% include 'main/includes/navbar.html'%}
+    {% include 'main/includes/messages.html'%}
+	 <div class='container'>
+		 <br><br>
+	 {% block content %}
+	 {% endblock %}
+	 </div>
+	<script src="{% static 'tinymce/js/prism.js' %}"></script>
+	<script>M.AutoInit();</script>
+</body>
